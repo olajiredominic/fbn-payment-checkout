@@ -37,7 +37,7 @@ export const  AESDecrypt = (item:string, secret = process.env.AESKEY)=>{
   return decryptedData.toString(CryptoJS.enc.Utf8);
 }
 
-export const initiateTransaction = (txn:InitiateTransactionPayload, live:boolean = false)=> fetch(live ? process.env.LIVEAPIURL :  process.env.TESTAPIURL, {
+export const initiateTransaction = (txn:InitiateTransactionPayload, live:boolean = false)=> fetch(live ? process.env.LIVEAPIURL : "https://digitallabrat.net/payment-checkout/api/v1/transactions/initiate", {
   method: 'POST',
   body: JSON.stringify({ encryptedData: AESEncrypt(JSON.stringify(txn))}),
   headers: {
@@ -64,7 +64,7 @@ export const createDom = ()=>{
   return div;
 }
 
-export const addPaymentFrame = (div:HTMLDivElement,accessCode:string, live:boolean = false) => div.innerHTML = `<div id="FBNPaymentCard" style="z-index: 1000000;display: block;position: fixed;top: 0;left: 0;right: 0;"> <iframe src="${live ? process.env.LIVEFRAMEURL : process.env.TESTFRAMEURL}/?code=${accessCode}" allowfullscreen="true" title="FB Collections" width="100%" height="${screen.height}">
+export const addPaymentFrame = (div:HTMLDivElement,accessCode:string, live:boolean = false) => div.innerHTML = `<div id="FBNPaymentCard" style="z-index: 1000000;display: block;position: fixed;top: 0;left: 0;right: 0;"> <iframe src="${live ? process.env.LIVEFRAMEURL : "http://paymentcheckoutui.azurewebsites.net"}/?code=${accessCode}" allowfullscreen="true" title="FB Collections" width="100%" height="${screen.height}">
 </iframe></div>`;
 
 export const removeDom = ()=>{
