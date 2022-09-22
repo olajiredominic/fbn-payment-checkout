@@ -1,4 +1,4 @@
-import { Greeter } from '../src/index';
+import { Greeter } from '../index';
 
 
 test('My Greeter', () => {
