@@ -20,9 +20,22 @@ export const validatePayment = function (txn:Transaction): true | ValidationErro
   return true;
 }
 
-
-export const  AESEncrypt = (item:string, key = process.env.AESKEY)=> CryptoJS.AES.encrypt(item, key).toString();
-export const  AESDecrypt = (item:string, key = process.env.AESKEY)=> CryptoJS.AES.decrypt(item, key).toString();
+const cipherOptions =  {
+  iv: CryptoJS.enc.Utf8.parse(''),
+  padding: CryptoJS.pad.Pkcs7,
+  mode: CryptoJS.mode.CBC,
+  keySize: 128 / 8,
+}
+export const  AESEncrypt = (item:string, secret = process.env.AESKEY)=> {
+  const key = CryptoJS.enc.Utf8.parse(secret);
+  const ciphertext = CryptoJS.AES.encrypt(item, key, cipherOptions).toString();
+  return ciphertext;
+}
+export const  AESDecrypt = (item:string, secret = process.env.AESKEY)=>{
+  const key = CryptoJS.enc.Utf8.parse(secret);
+  const decryptedData = CryptoJS.AES.decrypt(item, key, cipherOptions); // Fix: pass Base64 encoded ciphertext
+  return decryptedData.toString(CryptoJS.enc.Utf8);
+}
 
 export const initiateTransaction = (txn:InitiateTransactionPayload, live:boolean = false)=> fetch(live ? process.env.LIVEAPIURL :  process.env.TESTAPIURL, {
   method: 'POST',
