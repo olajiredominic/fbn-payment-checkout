@@ -12,15 +12,15 @@ export interface Fee{
 }
 
 export enum PaymentOptions{
-  Card,
-  QR,
-  PAYATTITUDE,
-  Wallet,
-  ACCOUNT,
+  Card = "Card",
+  QR = "QR",
+  PAYATTITUDE = "PAYATTITUDE",
+  Wallet = "Wallet",
+  ACCOUNT = "ACCOUNT",
 }
 
 export enum Currencies{
-  NGN
+   "NGN"
 }
 
 export interface Transaction{
@@ -28,15 +28,17 @@ export interface Transaction{
   ref: string;
   amount: number;
   customer: Customer;
-  fees: Fee;
-  meta?: any;
+  fees: Fee[];
+  meta?: {[key:string]:any};
   publicKey: string;
   description?: string;
-  currency?: Currencies;
+  currency?: "NGN"; // Replace with currency type
   callback: Function;
   onClose: Function;
-  options?: PaymentOptions[]
+  options?: ( "CARD"| "QR"| "PAYATTITUE"|"WALLET"|"ACCOUNT")[]
 }
+
+export interface ValidationError { error: string, field:string }
 
 export interface InitiateTransactionPayload{
   transactionReference: string;

@@ -1,28 +1,23 @@
 import CryptoJS from 'crypto-js'
 
-import { Currencies, InitiateTransactionPayload, Transaction } from "../types";
+import { Currencies, InitiateTransactionPayload, Transaction, ValidationError } from "../types";
 
-const { MINAMOUNT, MAXAMOUNT } = process.env
-
-interface ValidationError { error: string, field:string };
 export const validatePayment = function (txn:Transaction): true | ValidationError{
-  let error:ValidationError | null = null;
+  const { MINAMOUNT, MAXAMOUNT } = process.env
 
   // Validation
   const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  if (!txn.publicKey) error = { error: `Please provide your public key`, field: 'publicKey'};
-  if (!txn.ref) error = { error: `Please provide a unique reference for this tranasaction`, field: 'reference'};
-  if (!emailRegex.test(txn.customer.email)) error = { error: `Please provide a valid customer email`, field: 'email'};
-  if (isNaN(txn.amount)) error = { error: `Please provide a valid transaction amount`, field: 'amount'};
-  if (txn.amount < MINAMOUNT) error = { error: `Amount cannot be less then ${MINAMOUNT}`, field: 'amount'};
-  if (txn.amount > MAXAMOUNT) error = { error: `Amount cannot be greater then ${MINAMOUNT}`, field: 'amount'};
-  if (txn.currency && Object.values(Currencies).findIndex(item => item === txn.currency) < 0) error = { error: `Currency not accepted`, field: 'currency'};
+  if (!txn.publicKey) return { error: `Please provide your public key`, field: 'publicKey'};
+  if (!txn.ref) return { error: `Please provide a unique reference for this tranasaction`, field: 'reference'};
+  if (isNaN(txn.amount)) return { error: `Please provide a valid transaction amount`, field: 'amount'};
+  if (txn.amount < MINAMOUNT) return { error: `Amount cannot be less then ${MINAMOUNT}`, field: 'amount'};
+  if (txn.amount > MAXAMOUNT) return { error: `Amount cannot be greater then ${MAXAMOUNT}`, field: 'amount'};
+  if (!emailRegex.test(txn.customer.email)) return { error: `Please provide a valid customer email`, field: 'email'};
+  if (txn.currency && Object.values(Currencies).findIndex(item => item === txn.currency) < 0) return { error: `Currency not accepted`, field: 'currency'};
 
-  if (!txn.callback) error = { error: `Please provide a callback function`, field: 'callback'}
+  if (!txn.callback) return { error: `Please provide a callback function`, field: 'callback'}
 
-  if(!error) return true;
-  else return error;
-
+  return true;
 }
 
 
