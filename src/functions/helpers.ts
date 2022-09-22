@@ -2,7 +2,7 @@ import CryptoJS from 'crypto-js'
 
 import { Currencies, InitiateTransactionPayload, Transaction, ValidationError } from "../types";
 
-export const validatePayment = function (txn:Transaction): true | ValidationError{
+export const validatePayment =  (txn:Transaction): true | ValidationError=>{
   const { MINAMOUNT, MAXAMOUNT } = process.env
 
   // Validation
@@ -48,7 +48,7 @@ export const initiateTransaction = (txn:InitiateTransactionPayload, live:boolean
 
 export const createDom = ()=>{
   const document = window.document;
-  let div = document.createElement("div");
+  const div = document.createElement("div");
   div.setAttribute("id", "FBNCollections");
   div.style.display = "block";
   div.style.position = "fixed";

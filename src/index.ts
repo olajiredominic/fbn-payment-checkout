@@ -8,9 +8,9 @@ class FBNCheckout {
   constructor(transaction:Transaction){
    try {
     validatePayment(transaction);
-    this.initiateTransaction(transaction).then
+    this.initiateTransaction(transaction)
    } catch (error) {
-  
+    this._transaction?.callback({status:"error", error});
    }
 
     this.initiateTransaction(transaction)

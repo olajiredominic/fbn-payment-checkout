@@ -33,8 +33,8 @@ export interface Transaction{
   publicKey: string;
   description?: string;
   currency?: "NGN"; // Replace with currency type
-  callback: Function;
-  onClose: Function;
+  callback: (data:any)=>void;
+  onClose:  ()=>void;
   options?: ( "CARD"| "QR"| "PAYATTITUE"|"WALLET"|"ACCOUNT")[]
 }
 

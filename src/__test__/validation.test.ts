@@ -14,7 +14,7 @@ describe('Testing Validate Payment', () => {
   
   test('error is returned when required fields are passed incorrectly', () => {
     
-    let txn:Transaction = {
+    const txn:Transaction = {
       live: false,
       ref: "unique_txn_ref",
       amount: 100,
@@ -34,8 +34,8 @@ describe('Testing Validate Payment', () => {
       publicKey: "Your_public_key",
       description: "Payment description",
       currency: "NGN",
-      callback: ()=>{},
-      onClose:  ()=>{},
+      callback: ()=>null,
+      onClose:  ()=>null,
       options: ["QR", "CARD","WALLET","PAYATTITUE"]
     }
 
@@ -65,7 +65,7 @@ describe('Testing Validate Payment', () => {
   });
   
   test('Test minimum and maximum amount', () => {
-    let txn:Transaction = {
+    const txn:Transaction = {
       live: false,
       ref: "unique_txn_ref",
       amount: 100,
@@ -85,8 +85,8 @@ describe('Testing Validate Payment', () => {
       publicKey: "Your_public_key",
       description: "Payment description",
       currency: "NGN",
-      callback: ()=>{},
-      onClose:  ()=>{},
+      callback: ()=>null,
+      onClose:  ()=>null,
       options: ["QR", "CARD","WALLET","PAYATTITUE"]
     }
 
@@ -110,7 +110,7 @@ describe('Testing Validate Payment', () => {
   
   test('True is returned when required Fields are passed correctly', () => {
       
-  let txn:Transaction = {
+  const txn:Transaction = {
     live: false,
     ref: "unique_txn_ref",
     amount: 100,
@@ -130,8 +130,8 @@ describe('Testing Validate Payment', () => {
     publicKey: "Your_public_key",
     description: "Payment description",
     currency: "NGN",
-    callback: ()=>{},
-    onClose:  ()=>{},
+    callback: ()=>null,
+    onClose:  ()=>null,
     options: ["QR", "CARD","WALLET","PAYATTITUE"]
   }
     expect(validatePayment(txn)).toBe(true);
