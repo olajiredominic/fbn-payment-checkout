@@ -39,7 +39,7 @@ export const  AESDecrypt = (item:string, secret = process.env.AESKEY)=>{
 
 export const initiateTransaction = (txn:InitiateTransactionPayload, live:boolean = false)=> fetch(live ? process.env.LIVEAPIURL : "https://digitallabrat.net/payment-checkout/api/v1/transactions/initiate", {
   method: 'POST',
-  body: JSON.stringify({ encryptedData: AESEncrypt(JSON.stringify(txn))}),
+  body: JSON.stringify({ encryptedData: AESEncrypt(JSON.stringify(txn),"DCv9cjkAtiXj27U07MqLbnM0JLxEWSde")}),
   headers: {
     'Content-Type': 'application/json',
   }
