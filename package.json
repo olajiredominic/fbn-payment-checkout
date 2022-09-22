@@ -1,0 +1,24 @@
+{
+  "name": "payment-checkout",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build" : "tsc  -b"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lerryjay/fbn-payment-checkout.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lerryjay/fbn-payment-checkout/issues"
+  },
+  "homepage": "https://github.com/lerryjay/fbn-payment-checkout#readme",
+  "devDependencies": {
+    "typescript": "^4.8.3"
+  }
+}
