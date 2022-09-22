@@ -23,6 +23,7 @@ class FBNCheckout {
       transactionReference: ref,
       payerEmail: customer.email
     }
+    console.log("txnParams",txnParams )
     initiateTransaction(txnParams).then((response)=>{
       const dom = createDom();
       addPaymentFrame(dom,response.data.accesscode, this._transaction?.live);
