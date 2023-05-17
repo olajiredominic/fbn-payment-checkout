@@ -1,9 +1,9 @@
 
 export interface Customer{
-  firstname: string;
-  lastname: string;
+  firstname?: string;
+  lastname?: string;
   email: string;
-  id: string;
+  id?: string;
 }
 
 export interface Fee{
@@ -43,6 +43,9 @@ export interface ValidationError { error: string, field:string }
 export interface InitiateTransactionPayload{
   transactionReference: string;
   amount: number;
-  payerEmail: string,
+  payerEmail: string;
   publicKey: string;
+  payerName?:string;
+  purpose?:string;
+  isPaymeLink:boolean;
 }

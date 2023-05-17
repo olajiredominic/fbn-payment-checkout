@@ -39,8 +39,8 @@ describe('Testing Validate Payment', () => {
       options: ["QR", "CARD","WALLET","PAYATTITUE"]
     }
 
-    process.env.MINAMOUNT = 10;
-    process.env.MAXAMOUNT = 200;
+    process.env.MINAMOUNT = 100;
+    process.env.MAXAMOUNT = 100000;
     
     try {
       txn.customer.email = "";
@@ -90,8 +90,8 @@ describe('Testing Validate Payment', () => {
       options: ["QR", "CARD","WALLET","PAYATTITUE"]
     }
 
-    process.env.MINAMOUNT = 10;
-    process.env.MAXAMOUNT = 200;
+    process.env.MINAMOUNT = 100;
+    process.env.MAXAMOUNT = 100000;
 
     try {
       txn.amount = 1;
